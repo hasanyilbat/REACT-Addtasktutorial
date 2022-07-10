@@ -1,16 +1,17 @@
 import React from "react";
 
-const ListAllTasks = () => {
+const ListAllTasks = ({ tutorials }) => {
+  console.log(tutorials);
   return (
     <div>
-      <table class="table table-striped text-center">
+      <table className="table table-striped text-center">
         <thead>
           <tr>
             <th scope="col" className="w-25">
               Id
             </th>
             <th scope="col" className="w-25">
-              Task
+              Title
             </th>
             <th scope="col" className="w-50">
               Description
@@ -18,21 +19,16 @@ const ListAllTasks = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>asdasd</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Basdadasdadsadsird</td>
-          </tr>
+          {tutorials.map((tutor, index) => {
+            const { id, title, description } = tutor;
+            return (
+              <tr key={index}>
+                <th scope="row">{id}</th>
+                <td>{title}</td>
+                <td>{description}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

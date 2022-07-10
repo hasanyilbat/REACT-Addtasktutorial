@@ -18,7 +18,7 @@ const AddDeleteTask = () => {
       <div>
         <form className="mt-4 text-center" onSubmit={handleSubmit}>
           <div clasa="form-group text-center mt-3">
-            <label htmlFor="task">Task</label>
+            <label htmlFor="task">Title</label>
             <input
               type="text"
               className="form-control"
