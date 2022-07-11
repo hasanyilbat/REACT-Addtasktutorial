@@ -1,8 +1,10 @@
 import React from "react";
 import { FaEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
-const ListAllTasks = ({ tutorials, deleteTutorial }) => {
-  console.log(tutorials);
+import EditTask from "./EditTask";
+import { useState } from "react";
+const ListAllTasks = ({ tutorials, deleteTutorial, editTutorial }) => {
+  const [editedItem, setEditedItem] = useState("");
   return (
     <div>
       <table className="table table-striped text-center">
@@ -29,12 +31,15 @@ const ListAllTasks = ({ tutorials, deleteTutorial }) => {
                 <td className="cont">
                   {description}
                   <div className="icons">
-                    <div className="icon1">
-                      {" "}
+                    <div
+                      className="icon1"
+                      onClick={() => setEditedItem(tutor)}
+                      data-bs-toggle="modal"
+                      data-bs-target="#editModal"
+                    >
                       <FaEdit />
                     </div>
                     <div className="icon2" onClick={() => deleteTutorial(id)}>
-                      {" "}
                       <AiFillDelete />
                     </div>
                   </div>
@@ -44,46 +49,7 @@ const ListAllTasks = ({ tutorials, deleteTutorial }) => {
           })}
         </tbody>
       </table>
-
-      <div
-        class="modal fade"
-        id="edit"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
-                Modal title
-              </h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">...</div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" class="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <EditTask editTutorial={editTutorial} editedItem={editedItem} />
     </div>
   );
 };

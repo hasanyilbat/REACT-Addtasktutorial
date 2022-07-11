@@ -15,22 +15,33 @@ const Home = () => {
 
   useEffect(() => {
     getDataFromApi();
-  }, [data]);
+  }, []);
 
   const addTutorial = async (tutorial) => {
     await axios.post(url, tutorial);
-    // getDataFromApi();
+    getDataFromApi();
   };
 
   const deleteTutorial = async (id) => {
     await axios.delete(`${url}/${id}`);
-    // getDataFromApi();
+    getDataFromApi();
   };
 
+  const editTutorial = async (id, title, desc) => {
+    const filtered = data
+      .filter((tutor) => id === tutor.id)
+      .map(() => ({ title: title, description: desc }));
+    await axios.put(`${url}/${id}`, filtered[0]);
+    getDataFromApi();
+  };
   return (
     <div>
       <AddDeleteTask addTutorial={addTutorial} />
-      <ListAllTasks tutorials={data} deleteTutorial={deleteTutorial} />
+      <ListAllTasks
+        tutorials={data}
+        deleteTutorial={deleteTutorial}
+        editTutorial={editTutorial}
+      />
     </div>
   );
 };
