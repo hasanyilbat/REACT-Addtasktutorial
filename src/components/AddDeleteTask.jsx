@@ -1,22 +1,25 @@
 import React from "react";
 import { useState } from "react";
 
-const AddDeleteTask = () => {
+const AddDeleteTask = ({ addTutorial }) => {
   const [task, setTask] = useState("");
   const [desc, setDesc] = useState("");
 
   const handleSubmit = (e) => {
     console.log(task, desc);
     e.preventDefault();
+    addTutorial({ title: task, description: desc });
+    setTask("");
+    setDesc("");
   };
 
   return (
     <div>
-      <div className="display-4 text-danger text-center m-4">
+      <div className="display-4 text-danger text-center m-4 ">
         Add Task Tutorial
       </div>
       <div>
-        <form className="mt-4 text-center" onSubmit={handleSubmit}>
+        <form className="mt-4 text-center w-75 mx-auto" onSubmit={handleSubmit}>
           <div clasa="form-group text-center mt-3">
             <label htmlFor="task">Title</label>
             <input
